@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
 	urg.set_scanning_parameter(urg.deg2step(-90), urg.deg2step(+90), 0);
 	#endif
 	enum {
-		Capture_times = 10
+		Capture_times = 1
 	};
 	urg.start_measurement(Urg_driver::Distance, Urg_driver::Infinity_times, 0);
 	for (int i = 0; i < Capture_times; ++i) {
@@ -69,49 +69,4 @@ int main(int argc, char *argv[]){
 	getchar();
 	#endif
 	return 0;
-}
-#include <3052.h>
-unsigned int ad_dataud,ad_data_lr;
-int i,j;
-void main(void){
-	ad_init();
-	while(1){
-		AD.ADCSR.BIT.ADST=1;//ad変換開始
-		while(AD.DRCSR.BIT.ADF==0)//ad変換終了待ち
-		ad_data_ud=AD.ADDRB;
-		ad_data_ud=AD.ADDRC;
-		ad_data_ud>>=8;//8bit右にシフト
-		ad_data_lr>>=8;//8bit右にシフト
-		if(ad_data_ud>0x8f){
-			P1.DR.BYTE=0x01;//前進
-			P3.DR.BYTE=0x0b;//前進
-		}
-		else if(ad_data_ud<0x70){
-			P1.DR.BYTE=0x02;//後進
-			P3.DR.BYTE=0x0e;//後進
-		}
-		else if(ad_data_ud>0x8f){
-			P1.DR.BYTE=0x04;//右
-			P3.DR.BYTE=0x0a;//右
-		}
-		else if(ad_data_ud<0x70){
-			P1.DR.BYTE=0x08;//左
-			P3.DR.BYTE=0x0f;//左
-		}
-		else{
-			P1.DR.BYTE=0x10;//停止
-			P3.DR.BYTE=0x00;//停止
-		}
-	}
-}
-void ad_init(void){
-	P1.DDR.=0xff;
-	P1.DR.BYTE=0;
-	P3.DDR.=0xff;
-	P3.DR.BYTE=0;
-
-	AD.ADCSR.BIT.ADIE=0;
-	AD.ADCSR.BIT.SCAN=1;
-	AD.ADCSR.BIT.CKS=1;
-	AD.ADCSR.BIT.CH=6;
 }
