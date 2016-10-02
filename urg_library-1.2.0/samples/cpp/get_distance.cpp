@@ -38,13 +38,7 @@ namespace{
 	}
 }
 
-int main(void){
-	int l();//関数呼び込み
-	return 0;
-}
-
 int l(int argc, char *argv[]){
-	int front_index;
 	Connection_information information(argc, argv);
 	// Connects to the sensor
 	Urg_driver urg;
@@ -58,7 +52,7 @@ int l(int argc, char *argv[]){
 	urg.set_scanning_parameter(urg.deg2step(-90), urg.deg2step(+90), 0);
 	#endif
 	enum {
-		Capture_times = 10
+		Capture_times = 1
 	};
 	urg.start_measurement(Urg_driver::Distance, Urg_driver::Infinity_times, 0);
 	for (int i = 0; i < Capture_times; ++i) {
@@ -69,17 +63,24 @@ int l(int argc, char *argv[]){
 			return 1;
 		}
 		print_data(urg, data, time_stamp);
-		if (front_index<100){
-			return 1;
-			cout << ("1") << endl;
 		}
-		if (front_index>100){
-			return 0;
-			cout << ("0") << endl;
-		}
-	}
 	#if defined(URG_MSC)
 	getchar();
 	#endif
+	return 0;
+}
+int main(void){
+	void print_data(const Urg_driver& urg,
+	const vector<long>& data, long time_stamp);//関数呼び出し
+	int front_index;
+	int data[front_index];
+	if (data[front_index]<150) {//計測値が150mmより小さい場合
+		cout << ("1") << endl;//1と表示
+		return 1;
+	}
+	if (data[front_index]>150) {//計測値が150mmより大きい場合
+		cout << ("0") << endl;//0と表示
+		return 0;
+	}
 	return 0;
 }
