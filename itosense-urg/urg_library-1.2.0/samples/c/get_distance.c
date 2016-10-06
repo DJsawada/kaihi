@@ -10,18 +10,15 @@
 #include "open_urg_sensor.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
-
-static void print_data(urg_t *urg, long data[], int data_n, long time_stamp)
-{
+static void print_data(urg_t *urg, long data[], int data_n, long time_stamp){
 #if 1
     int front_index;
-
     (void)data_n;
-
     // Shows only the front step
     front_index = urg_step2index(urg, 0);
-    printf("%ld [mm], (%ld [msec])\n", data[front_index], time_stamp);
+    //printf("%ld [mm], (%ld [msec])\n", data[front_index], time_stamp);
 
 #else
     (void)time_stamp;
