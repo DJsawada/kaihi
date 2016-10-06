@@ -48,8 +48,8 @@ int sensor(Urg_driver &urg) {
 		cout << "Urg_driver::get_distance(): " << urg.what() << endl;
 		return 1;
 	}
-	short j;
 	//cout << data.size() << endl;
+	short j;
 	double angle = 180.0 / (data.size() - 1);
 	for(j=0;j<data.size();j++){
 		if(data[j] <= 20) continue;
@@ -82,7 +82,7 @@ Connection_information information(argc, argv);
 	urg.set_scanning_parameter(urg.deg2step(-90), urg.deg2step(+90), 0);
 	#endif
 	enum{
-		Capture_times = 513
+		Capture_times = 721
 	};
 	urg.start_measurement(Urg_driver::Distance, Urg_driver::Infinity_times, 0);
 	while(1){
