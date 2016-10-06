@@ -79,7 +79,7 @@ Connection_information information(argc, argv);
 	// Gets measurement data
 	#if 1
 	// Case where the measurement range (start/end steps) is defined
-	urg.set_scanning_parameter(urg.deg2step(-90), urg.deg2step(+90), 0);
+	urg.set_scanning_parameter(urg.deg2step(-60), urg.deg2step(+60), 0);
 	#endif
 	enum{
 		Capture_times = 721
