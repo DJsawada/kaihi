@@ -53,16 +53,19 @@ int sensor(Urg_driver &urg) {
 	double angle = 180.0 / (data.size() - 1);
 	for(j=0;j<data.size();j++){
 		if(data[j] <= 20) continue;
-		double theta,pi,x,y;
-		pi=3.14159265359;
+		double theta,pi,x,y,front_index;
+		pi=3.141592653589793238462643383279502884197169399375105820974944592307816486280348253421170679821480865132823066470938446095;
 		double now = angle * j - 90;
 		theta = now * pi / 180.0;
 		//cout << "distance " << data[j] << "[mm] , angle " << now <<"[deg]" <<  endl;
 		x=-data[j]*sin(theta);
 		y=data[j]*cos(theta);
 		//cout << "x" << x << ", y" << y << endl;
-		if(x<150 && y<150 && x > -150 && y > -150){;
+		if(x<200 && y<200 && x > -200 && y > -200){;
 			return 1;
+		}
+		else if (data[front_index] = 0){;
+			return 0;
 		}
 	}
 	return 0;	
@@ -82,7 +85,7 @@ Connection_information information(argc, argv);
 	urg.set_scanning_parameter(urg.deg2step(-60), urg.deg2step(+60), 0);
 	#endif
 	enum{
-		Capture_times = 721
+		Capture_times = 513
 	};
 	urg.start_measurement(Urg_driver::Distance, Urg_driver::Infinity_times, 0);
 	while(1){
