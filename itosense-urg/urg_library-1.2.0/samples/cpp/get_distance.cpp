@@ -64,7 +64,7 @@ int sensor(Urg_driver &urg) {
 		if(x<200 && y<200 && x > -200 && y > -200){;
 			return 1;
 		}
-		else if (data[front_index] = 0){;
+		else if (x<300000 && y<300000 && x > -300000 && y > -300000){;
 			return 0;
 		}
 	}
