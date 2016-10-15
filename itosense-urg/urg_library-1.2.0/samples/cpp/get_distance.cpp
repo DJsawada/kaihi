@@ -85,7 +85,7 @@ Connection_information information(argc, argv);
 	urg.set_scanning_parameter(urg.deg2step(-60), urg.deg2step(+60), 0);
 	#endif
 	enum{
-		Capture_times = 513
+		Capture_times = 721
 	};
 	urg.start_measurement(Urg_driver::Distance, Urg_driver::Infinity_times, 0);
 	while(1){
