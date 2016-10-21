@@ -53,16 +53,24 @@ int sensor(Urg_driver &urg) {
 	double angle = 180.0 / (data.size() - 1);
 	for(j=0;j<data.size();j++){
 		if(data[j] <= 20) continue;
-		double theta,pi,x,y;
-		pi=3.14159265359;
+<<<<<<< HEAD
+		double theta,pi,x,y,front_index;	
+	pi=3.141592653589793238462643383279502884197169399375105820974944592307816486280348253421170679821480865132823066470938446095;
+=======
+		double theta,pi,x,y,front_index;
+		pi=3.141592653589793238462643383279502884197169399375105820974944592307816486280348253421170679821480865132823066470938446095;
+>>>>>>> e463df79fb42ed9360343f60156fe6f3d0575f1b
 		double now = angle * j - 90;
 		theta = now * pi / 180.0;
 		//cout << "distance " << data[j] << "[mm] , angle " << now <<"[deg]" <<  endl;
 		x=-data[j]*sin(theta);
 		y=data[j]*cos(theta);
 		//cout << "x" << x << ", y" << y << endl;
-		if(x<150 && y<150 && x > -150 && y > -150){;
+		if(x<800 && y<800 && x > -800 && y > -800){;
 			return 1;
+		}
+		else if (x<300000 && y<300000 && x > -300000 && y > -300000){;
+			return 0;
 		}
 	}
 	return 0;	
