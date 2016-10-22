@@ -4,7 +4,6 @@
 
   $Id: get_distance.cpp,v c5747add6615 2015/05/07 03:18:34 alexandr $
 */
-
 #include "Urg_driver.h"
 #include "Connection_information.h"
 #include "math_utilities.h"
@@ -40,7 +39,6 @@ namespace{
 		#endif
 	}
 };
-
 int sensor(Urg_driver &urg) {
 	vector<long> data;
 	long time_stamp = 0;
@@ -61,16 +59,15 @@ int sensor(Urg_driver &urg) {
 		x=-data[j]*sin(theta);
 		y=data[j]*cos(theta);
 		//cout << "x" << x << ", y" << y << endl;
-		if(x<200 && y<200 && x > -200 && y > -200){;
+		if(x<1000 && y<1000 && x > -1000 && y > -1000){;
 			return 1;
 		}
-		else if (x<300000 && y<300000 && x > -300000 && y > -300000){;
+		else if (x>30000 && y>30000 && x < -30000 && y < -30000){;
 			return 0;
 		}
 	}
 	return 0;	
 }
-
 int main(int argc, char *argv[]){
 Connection_information information(argc, argv);
 	// Connects to the sensor
@@ -85,7 +82,7 @@ Connection_information information(argc, argv);
 	urg.set_scanning_parameter(urg.deg2step(-60), urg.deg2step(+60), 0);
 	#endif
 	enum{
-		Capture_times = 721
+		Capture_times = 513
 	};
 	urg.start_measurement(Urg_driver::Distance, Urg_driver::Infinity_times, 0);
 	while(1){
